@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 /**
- * java类简单作用描述
  *
- * @Description: java类作用描述
+ *
+ * @Description: 配置分页查询类
  * @Author: 作者姓名
  * @CreateDate: 2018/10/25 9:25
  * @UpdateUser: jiaorongguo

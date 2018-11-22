@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * 封装请求响应
  *
- * @Description: 请求响应
+ * @Description: 封装请求响应
  * @Author: 作者姓名
  * @CreateDate: 2018/10/24 10:33
  * @UpdateUser: jiaorongguo

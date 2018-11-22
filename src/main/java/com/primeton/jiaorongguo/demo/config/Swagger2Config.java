@@ -20,9 +20,9 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 /**
- * java类简单作用描述
+ * Swagger2配置类
  *
- * @Description: java类作用描述
+ * @Description: Swagger2配置类
  * @Author: 作者姓名
  * @CreateDate: 2018/10/29 17:18
  * @UpdateUser: jiaorongguo

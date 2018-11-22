@@ -1,7 +1,7 @@
 package com.primeton.jiaorongguo.demo.common;
 
 /**
- * java类简单作用描述
+ * 响应码枚举类
  *
  * @Description: 响应码
  * @Author: 作者姓名

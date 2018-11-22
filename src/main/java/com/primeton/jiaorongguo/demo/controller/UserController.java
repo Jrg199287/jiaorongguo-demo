@@ -46,7 +46,7 @@ public class UserController {
      */
     @ApiOperation(value = "添加用户", response = Response.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "用户对象", name = "user", dataType = "User", required = true),
+            @ApiImplicitParam(value = "用户信息", name = "user", dataType = "User", required = true),
     })
     @PostMapping
     public Response<User> createUser(@RequestBody User user) throws CommonException {
@@ -63,7 +63,7 @@ public class UserController {
 
     @ApiOperation(value = "用户登陆", response = Response.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "用户对象", name = "user", dataType = "User", required = true),
+            @ApiImplicitParam(value = "用户信息", name = "user", dataType = "User", required = true),
     })
     @PostMapping(value = "/actions/login")
     public Response<User> login(HttpSession session, @RequestBody User user) throws CommonException {
@@ -71,13 +71,13 @@ public class UserController {
     }
 
     /**
-     * 删除用户
+     * 根据主键id删除用户
      *
      * @param id 用户id
      * @return
      */
 
-    @ApiOperation(value = "删除用户", response = Response.class)
+    @ApiOperation(value = "根据主键id删除用户", response = Response.class)
     @ApiImplicitParams({
             @ApiImplicitParam(value = "用户id", name = "id", dataType = "Integer", required = true),
     })
@@ -96,7 +96,7 @@ public class UserController {
      */
     @ApiOperation(value = "更新用户信息", response = Response.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "用户对象", name = "user", dataType = "User", required = true),
+            @ApiImplicitParam(value = "用户信息", name = "user", dataType = "User", required = true),
     })
     @PutMapping
     public Response<User> modifyUser(@RequestBody User user) throws CommonException {
@@ -115,7 +115,7 @@ public class UserController {
      * @throws CommonException
      */
 
-    @ApiOperation(value = "分页查询", response = Response.class)
+    @ApiOperation(value = "根据条件分页查询", response = Response.class)
     @ApiImplicitParams({
             @ApiImplicitParam(value = "起始页数", name = "pageIndex", dataType = "int", required = true),
             @ApiImplicitParam(value = "每页数量", name = "pageSize", dataType = "int", required = true),

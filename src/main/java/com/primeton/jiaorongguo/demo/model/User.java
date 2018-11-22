@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
-@ApiModel(description = "用户对象user")
+@ApiModel(description = "用户对象实体类")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 5408699143801033394L;
@@ -19,6 +19,7 @@ public class User implements Serializable {
     private Integer groupId;
     @ApiModelProperty("分组名称")
     private String groupName;
+
     public User() {
 
     }
@@ -30,12 +31,14 @@ public class User implements Serializable {
         this.groupId = groupId;
         this.groupName = groupName;
     }
-    public User(Integer id, String userName,  Integer groupId, String groupName) {
+
+    public User(Integer id, String userName, Integer groupId, String groupName) {
         this.id = id;
         this.userName = userName;
         this.groupId = groupId;
         this.groupName = groupName;
     }
+
     public User(Integer id, String userName, String passWord, Integer groupId) {
         this.id = id;
         this.userName = userName;

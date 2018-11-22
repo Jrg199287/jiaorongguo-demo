@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
-@ApiModel(description = "组织对象")
+@ApiModel(description = "组织对象实体类")
 public class Organization implements Serializable {
     private static final long serialVersionUID = 3856523950597317110L;
     @ApiModelProperty("组织ID")
@@ -53,7 +53,7 @@ public class Organization implements Serializable {
                 '}';
     }
 
-    public Organization( String groupName,Integer groupId, Integer parentId) {
+    public Organization(String groupName, Integer groupId, Integer parentId) {
         this.groupId = groupId;
         this.groupName = groupName;
         this.parentId = parentId;

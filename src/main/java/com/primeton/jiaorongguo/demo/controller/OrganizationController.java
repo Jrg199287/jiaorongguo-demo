@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 组织机构控制层
+ * 组织机构管理类
  *
  * @Description: 组织机构增删改查入口
  * @Author: jiaorongguo
@@ -43,7 +43,7 @@ public class OrganizationController {
     @PostMapping
     @ApiOperation(value = "创建分组", response = Response.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "组织机构对象", name = "organization", dataType = "Organization", required = true),
+            @ApiImplicitParam(value = "组织机构信息", name = "organization", dataType = "Organization", required = true),
     })
     public Response<Organization> createOrganization(@RequestBody Organization organization) throws CommonException {
         return OrganizationService.createOrganization(organization);
@@ -57,9 +57,9 @@ public class OrganizationController {
      * @throws CommonException
      */
     @PutMapping
-    @ApiOperation(value = "更新分组", response = Response.class)
+    @ApiOperation(value = "更改组织机构", response = Response.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "组织机构对象", name = "organization", dataType = "Organization", required = true),
+            @ApiImplicitParam(value = "组织机构信息", name = "organization", dataType = "Organization", required = true),
     })
     public Response<Organization> modifyOrganization(@RequestBody Organization organization) throws CommonException {
         return OrganizationService.modifyOrganization(organization);
@@ -67,14 +67,14 @@ public class OrganizationController {
 
 
     /**
-     * 删除该组织
+     * 删除组织机构
      *
      * @param groupId 组织id
      * @return
      * @throws CommonException
      */
     @DeleteMapping("/{groupId}")
-    @ApiOperation(value = "删除分组", response = Response.class)
+    @ApiOperation(value = "删除组织机构", response = Response.class)
     @ApiImplicitParams({
             @ApiImplicitParam(value = "主键id", name = "groupId", dataType = "Integer", required = true)
     })
@@ -90,7 +90,7 @@ public class OrganizationController {
      * @return
      * @throws CommonException
      */
-    @ApiOperation(value = "根据主键查询", response = Response.class)
+    @ApiOperation(value = "主键查询", response = Response.class)
     @ApiImplicitParams({
             @ApiImplicitParam(value = "部门id", name = "groupId", dataType = "Integer", required = true),
     })
@@ -110,7 +110,7 @@ public class OrganizationController {
      * @throws CommonException
      */
     @GetMapping
-    @ApiOperation(value = "查询每组人员信息", response = Response.class)
+    @ApiOperation(value = "查询该组人员详情", response = Response.class)
     @ApiImplicitParams({
             @ApiImplicitParam(value = "起始页数", name = "pageIndex", dataType = "int", required = true),
             @ApiImplicitParam(value = "每页数量", name = "pageSize", dataType = "int", required = true),
@@ -121,7 +121,7 @@ public class OrganizationController {
     }
 
     /**
-     * 查询该机构下的所有子机构
+     * 查询该机构所有子机构
      * @param parentId 父节点id
      * @return
      * @throws CommonException
