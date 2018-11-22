@@ -1,0 +1,28 @@
+spring:
+  datasource:
+   driver-class-name: com.mysql.jdbc.Driver
+   url: jdbc:mysql://localhost:3306/puyuan?characterEncoding=utf-8
+   username: root
+   password: 123456
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://10.15.15.196:3306/jinandemo?characterEncoding=UTF-8
+#    username: root
+#    password: primeton4cloud
+
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml
+  #  config-location:  classpath:mappers/application.xml
+  type-aliases-package: com.primeton.puyuan.dao
+
+
+logging:
+  config: classpath:logback.xml
+  level:
+    com.simons.cn.springbootdemo.dao.system:
+       debug
+
+server:
+  port: 12278
+
+
+

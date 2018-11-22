@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.primeton.jiaorongguo.demo.dao.UserMapper" >
+  <resultMap id="BaseResultMaps" type="com.primeton.jiaorongguo.demo.model.User" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="group_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_Lists" >
+    id, username, password, group_id
+  </sql>
+  <select id="get" resultMap="BaseResultMaps" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_Lists" />
+    from `jrg_user`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from `jrg_user`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.primeton.jiaorongguo.demo.model.User" useGeneratedKeys="true" keyProperty="id">
+    insert into `jrg_user` (id, username, password,
+      group_id)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR},
+      #{groupId,jdbcType=INTEGER})
+  </insert>
+
+  <update id="update" parameterType="com.primeton.jiaorongguo.demo.model.User" >
+    update `jrg_user`
+    set username = #{userName,jdbcType=VARCHAR},
+      password = #{passWord,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="counts" parameterType="string" resultType="int">
+    select count(1)
+    from `jrg_user`
+    where username =#{userName}
+  </select>
+
+  <select id="checkUser" parameterType="string" resultType="com.primeton.jiaorongguo.demo.model.User">
+    select
+    <include refid="Base_Column_Lists" />
+    from `jrg_user`
+    where username = #{userName}
+    and password = #{passWord}
+  </select>
+
+  <select id="queryUsers"  parameterType="java.lang.String" resultType="com.primeton.jiaorongguo.demo.model.User">
+    select
+    u.id,u.username,u.group_id as groupId, o.group_name as groupName
+    FROM `jrg_user` as u JOIN `jrg_organization` as o
+    where 1=1
+    AND u.group_id = o.group_id
+    <if test="userName != null and userName != ''">
+      AND u.username LIKE "%"#{userName}"%"
+    </if>
+    <if test="groupId != null and groupId!= 0">
+      AND u.group_id = #{groupId}
+    </if>
+  </select>
+</mapper>

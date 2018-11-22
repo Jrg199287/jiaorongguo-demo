@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.primeton.jiaorongguo.demo.dao.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.primeton.jiaorongguo.demo.model.Organization" >
+    <constructor >
+      <arg column="group_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="group_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+   group_name, group_id,parent_id
+  </sql>
+  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `jrg_organization`
+    where group_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from `jrg_organization`
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.primeton.jiaorongguo.demo.model.Organization" useGeneratedKeys="true" keyProperty="groupId" >
+    insert into `jrg_organization` (group_name, group_id,parent_id
+      )
+    values ( #{groupName,jdbcType=VARCHAR}, #{groupId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}
+      )
+  </insert>
+
+  <update id="update" parameterType="com.primeton.jiaorongguo.demo.model.Organization" >
+    update `jrg_organization`
+    set group_name = #{groupName,jdbcType=VARCHAR},
+    <if test="parentId != null and parentId != ''">
+      parent_id= #{parentId,jdbcType=INTEGER}
+    </if>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+
+  <select id="query" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `jrg_organization`
+    where group_name =#{groupName}
+  </select>
+
+  <select id="queryOrganizationMembers" parameterType="int"  resultType="com.primeton.jiaorongguo.demo.model.User">
+    SELECT b.id,b.password,a.group_id as groupId,a.group_name as groupName,b.username FROM jrg_organization AS a INNER JOIN
+    jrg_user as b ON  a.group_id =b.group_id
+   AND a.group_id=#{groupId,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryOrganizationChildrens"   resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `jrg_organization` WHERE 1=1
+    and parent_id=#{parentId}
+  </select>
+
+  <select id="queryOrganizations"   resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `jrg_organization`
+  </select>
+</mapper>

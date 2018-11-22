@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <contextName>posp-agent-platform</contextName>
+
+    <!--TotalFileAppender property-->
+    <property name="TOTAL_FILE_LOG_DIR" value="${catalina.base}/logs" />
+    <property name="TOTAL_FILE_LOG_NAME" value="puyuan_test_info" />
+
+    <!--TotalWarnFileAppender property-->
+    <property name="TOTAL_WARN_LOG_DIR" value="${catalina.base}/logs" />
+    <property name="TOTAL_WARN_LOG_NAME" value="puyuan_warn" />
+
+
+    <!--控制台日志打印-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--总流程打印-->
+    <appender name="TotalFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${TOTAL_FILE_LOG_DIR}/${TOTAL_FILE_LOG_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${TOTAL_FILE_LOG_DIR}/${TOTAL_FILE_LOG_NAME}-%d{yyyy-MM-dd}-%i.log.gz
+            </fileNamePattern>
+            <MaxHistory>365</MaxHistory>
+            <maxFileSize>50MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [ %thread ] - [ %-5level ] [ %logger{80} : %line ] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--警告错误打印-->
+    <appender name="TotalWarnFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${TOTAL_WARN_LOG_DIR}/${TOTAL_WARN_LOG_NAME}.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${TOTAL_WARN_LOG_DIR}/${TOTAL_WARN_LOG_NAME}-%d{yyyy-MM-dd}-%i.log
+            </fileNamePattern>
+            <MaxHistory>365</MaxHistory>
+            <maxFileSize>50MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [ %thread ] - [ %-5level ] [ %logger{80} : %line ] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="com.primeton.jiaorongguo.demo" level="info" addtivity="false">
+        <appender-ref ref="console" />
+        <appender-ref ref="TotalFileAppender" />
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="console" />
+        <appender-ref ref="TotalWarnFileAppender" />
+    </root>
+
+
+</configuration>

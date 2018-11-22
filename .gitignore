@@ -1,0 +1,4 @@
+#package file
+*.idea
+*.mvn
+*.catalina.base_IS_UNDEFINED
